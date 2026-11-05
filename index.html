@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gather & Grow | Тематические встречи и волонтёрство</title>
+    <meta
+      name="description"
+      content="Запись на тематические встречи, мероприятия и волонтёрские события. Выберите время, место и формат участия."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-mark">G</div>
+          <span>Gather & Grow</span>
+        </div>
+        <nav class="main-nav" aria-label="Главная навигация">
+          <a href="#about">О нас</a>
+          <a href="#events">Мероприятия</a>
+          <a href="#register">Запись</a>
+        </nav>
+        <a class="button button-small" href="#register">Записаться</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Сообщество для людей, которым важны идеи и действие</p>
+            <h1>Тематические встречи, события и волонтёрство в одном месте</h1>
+            <p class="subtext">
+              Мы собираем единомышленников для полезных разговоров, творческих встреч и
+              практической помощи людям и городу. Присоединяйтесь к событиям, которые
+              вдохновляют и создают настоящую связь между участниками.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#register">Записаться на встречу</a>
+              <a class="button button-secondary" href="#events">Посмотреть события</a>
+            </div>
+            <ul class="stat-list" aria-label="Показатели сообщества">
+              <li><strong>150+</strong><span>участников</span></li>
+              <li><strong>18</strong><span>мероприятий</span></li>
+              <li><strong>6</strong><span>волонтёрских инициатив</span></li>
+            </ul>
+          </div>
+
+          <div class="hero-card" aria-label="Предстоящие события">
+            <p class="card-label">Ближайшее мероприятие</p>
+            <h2>Клуб обсуждений “Люди и город”</h2>
+            <div class="event-meta">
+              <span>📅 18 ноября</span>
+              <span>🕒 18:30</span>
+            </div>
+            <div class="event-meta">
+              <span>📍 Центр культуры “Площадка”</span>
+            </div>
+            <p>
+              Разговор о том, как сделать пространство вокруг нас более доброжелательным,
+              активным и открытым для всех.
+            </p>
+            <div class="tag-row">
+              <span>Мастер-класс</span>
+              <span>Нетворкинг</span>
+              <span>Волонтёрство</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container narrow">
+          <p class="section-tag">О нас</p>
+          <h2>Мы создаём пространство для общения, идей и полезных дел</h2>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="icon">🎤</div>
+              <h3>Тематические встречи</h3>
+              <p>
+                Обсуждаем идеи, темы и вызовы общества через живое общение и экспертные
+                выступления.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">🤝</div>
+              <h3>Волонтёрство</h3>
+              <p>
+                Помогаем людям участвовать в реальных инициативах, социальных проектах и
+                совместных делах.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">🌱</div>
+              <h3>Сообщество</h3>
+              <p>
+                Мы объединяем людей, которым важно не просто присутствовать, а быть частью
+                движения и изменений.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="events" class="section alt-bg">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag">Мероприятия</p>
+              <h2>Выберите формат участия</h2>
+            </div>
+            <a class="button button-secondary" href="#register">Зарегистрироваться</a>
+          </div>
+
+          <div class="event-list" id="eventCards"></div>
+        </div>
+      </section>
+
+      <section id="register" class="section form-section">
+        <div class="container form-grid">
+          <div class="info-panel">
+            <p class="section-tag">Запись</p>
+            <h2>Зарегистрируйтесь на мероприятие</h2>
+            <p>
+              Выберите интересующее событие, удобное время и локацию. После записи мы
+              отправим подтверждение на вашу электронную почту.
+            </p>
+            <ul class="check-list">
+              <li>Подтверждение участия в день события</li>
+              <li>Актуальное время и место в карточке события</li>
+              <li>Возможность принять участие в волонтёрской программе</li>
+            </ul>
+          </div>
+
+          <form id="registrationForm" class="registration-form">
+            <div class="field-grid">
+              <label>
+                <span>Имя</span>
+                <input type="text" name="name" placeholder="Ваше имя" required />
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </label>
+            </div>
+
+            <label>
+              <span>Мероприятие</span>
+              <select id="eventSelect" name="event" required></select>
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>Дата</span>
+                <input id="eventDate" type="date" name="date" required />
+              </label>
+              <label>
+                <span>Время</span>
+                <select id="eventTime" name="time" required></select>
+              </label>
+            </div>
+
+            <label>
+              <span>Место</span>
+              <input id="eventLocation" type="text" name="location" readonly />
+            </label>
+
+            <label>
+              <span>Роль</span>
+              <select name="role">
+                <option value="guest">Участник</option>
+                <option value="volunteer">Волонтёр</option>
+                <option value="speaker">Спикер / ведущий</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Комментарий</span>
+              <textarea name="message" rows="4" placeholder="Напишите, если есть вопросы или пожелания"></textarea>
+            </label>
+
+            <label class="checkbox-line">
+              <input type="checkbox" name="consent" required />
+              <span>Согласен на обработку данных и получение подтверждения участия.</span>
+            </label>
+
+            <button type="submit" class="button submit-button">Записаться</button>
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-mark">G</div>
+            <span>Gather & Grow</span>
+          </div>
+        </div>
+        <p>Создаём пространство для встреч, идей и добрых дел.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
