@@ -1,0 +1,49 @@
+/* Дополнительная полировка визуального стиля СЛКК */
+:root{--slkk-grid:rgba(181,170,255,.045)}
+body{background-image:linear-gradient(var(--slkk-grid) 1px,transparent 1px),linear-gradient(90deg,var(--slkk-grid) 1px,transparent 1px);background-size:54px 54px;background-position:center top;background-attachment:fixed}
+.site-header{background:rgba(9,11,22,.9)}
+.brand-mark{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;font-weight:700}
+.hero{min-height:690px;padding-top:82px}
+.hero-copy{position:relative}
+.hero-copy:before{content:'КАМЕНСК';position:absolute;z-index:-1;left:-32px;top:-50px;color:rgba(157,123,255,.035);font-family:'Space Grotesk',sans-serif;font-size:clamp(6rem,15vw,12rem);font-weight:700;letter-spacing:-.12em;white-space:nowrap;pointer-events:none}
+.hero h1{max-width:760px;text-wrap:balance}
+.hero .subtext{max-width:520px;line-height:1.8}
+.hero-actions .button{min-height:52px}
+.stat-list{gap:0;max-width:620px}
+.stat-list li{min-width:0;flex:1;padding:0 16px;border-left:1px solid var(--line)}
+.stat-list li:first-child{padding-left:0;border-left:0}
+.stat-list strong{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:#e8e4ff}
+.stat-list span{font-size:.72rem}
+.next-event{padding:21px 23px 23px;box-shadow:0 28px 80px rgba(0,0,0,.4),0 0 42px rgba(111,83,255,.08)}
+.event-art{height:190px}
+.event-art:before{width:390px;height:135px;left:-45px;top:24px}
+.event-art:after{width:360px;height:118px;left:40px;top:49px}
+.orb-a{animation:slkk-float 7s ease-in-out infinite}
+.orb-b{animation:slkk-float 6s ease-in-out -2s infinite reverse}
+.section-heading{margin-bottom:42px}
+.feature-card{min-height:305px;padding:27px 25px;background:linear-gradient(145deg,rgba(23,26,49,.97),rgba(12,15,29,.97))}
+.feature-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.22rem}
+.feature-card p{line-height:1.75}
+.feature-icon{box-shadow:inset 0 0 18px rgba(255,255,255,.035)}
+.values-strip{min-height:58px}
+.events-section{position:relative}
+.events-section:before{content:'АФИША';position:absolute;right:4%;top:5%;color:rgba(165,145,255,.025);font-family:'Space Grotesk',sans-serif;font-size:clamp(5rem,15vw,12rem);font-weight:700;letter-spacing:-.1em;pointer-events:none}
+.events-section .container{position:relative;z-index:1}
+.empty-state{min-height:130px;display:flex;align-items:center;gap:7px}
+.events-hint{margin-left:3px}
+.support-visual{min-height:450px}
+.support-copy h2{line-height:1.04}
+.support-steps article{padding-bottom:14px;border-bottom:1px solid rgba(195,190,255,.08)}
+.support-steps article:last-child{padding-bottom:0;border-bottom:0}
+.support-note{border-left:2px solid #9b7bff}
+.registration-form{border-color:rgba(164,143,255,.18);box-shadow:0 28px 80px rgba(0,0,0,.34),0 0 38px rgba(111,83,255,.06)}
+.form-title{padding-bottom:17px;border-bottom:1px solid var(--line)}
+.registration-form input,.registration-form select,.registration-form textarea{background:rgba(8,10,20,.82)}
+.registration-form input:hover,.registration-form select:hover,.registration-form textarea:hover{border-color:rgba(166,143,255,.3)}
+.registration-form .button{min-height:51px}
+.footer-row{border-top:1px solid rgba(195,190,255,.035)}
+:focus-visible{outline:2px solid #b9a2ff;outline-offset:4px}
+@keyframes slkk-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(max-width:900px){.hero{min-height:auto}.stat-list li{padding-inline:11px}}
+@media(max-width:700px){body{background-size:38px 38px}.hero{padding-top:52px}.hero-copy:before{left:-10px;top:-27px;font-size:6rem}.stat-list{gap:12px}.stat-list li{padding:0 10px}.stat-list strong{font-size:.87rem}.stat-list span{font-size:.67rem}.next-event{padding:17px}.event-art{height:165px}.feature-card{min-height:auto}.support-visual{min-height:330px}.empty-state{align-items:flex-start;flex-direction:column;justify-content:center}.footer-row .brand>span:last-child{font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){.orb-a,.orb-b{animation:none}}

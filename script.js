@@ -1,5 +1,9 @@
+const designStylesheet = document.createElement('link');
+designStylesheet.rel = 'stylesheet';
+designStylesheet.href = 'design.css';
+document.head.append(designStylesheet);
+
 const STORAGE_KEYS = { events: 'slkk-events-v1', registrations: 'slkk-registrations-v1' };
-// No sample events are shown: add confirmed events in the organizer demo panel.
 let events = readStorage(STORAGE_KEYS.events, []);
 const cards = document.getElementById('eventCards');
 const eventSelect = document.getElementById('eventSelect');
