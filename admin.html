@@ -2,22 +2,22 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="theme-color" content="#090b16" />
-    <title>Панель организатора — Точка встречи</title><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" /><link rel="stylesheet" href="styles.css" />
+    <title>Панель организатора — СЛКК</title><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" /><link rel="stylesheet" href="styles.css" />
   </head>
   <body class="admin-body">
-    <header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">Т</span><span>точка встречи</span></a><a class="admin-back" href="index.html">← На сайт</a></div></header>
+    <header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">С</span><span>СЛКК</span></a><a class="admin-back" href="index.html">← На сайт</a></div></header>
     <main class="container admin-main">
-      <div class="admin-heading"><div><p class="section-tag">Управление сообществом</p><h1>Панель организатора</h1></div><a class="button button-small" href="index.html#register">Открыть форму <span aria-hidden="true">↗</span></a></div>
-      <p class="admin-warning"><strong>Важно:</strong> это демонстрационная панель без авторизации. События и заявки хранятся только в локальном хранилище этого браузера; посетители сайта не увидят их на других устройствах. Не используйте для реальных персональных данных.</p>
+      <div class="admin-heading"><div><p class="section-tag">Каменск-Уральский</p><h1>Панель организатора</h1></div><a class="button button-small" href="index.html#register">Открыть форму <span aria-hidden="true">↗</span></a></div>
+      <p class="admin-warning"><strong>Демо-режим:</strong> эта панель не защищена паролем. События и заявки сохраняются в браузере на этом устройстве; посетители сайта на других устройствах их не увидят. Не используйте для реальных персональных данных и не публикуйте эту страницу как рабочую админку.</p>
       <div class="admin-grid">
-        <section class="admin-panel"><h2>Добавить событие</h2><form id="eventForm" class="admin-form">
-          <label>Название<input name="title" required maxlength="100" placeholder="Например, клуб обсуждений" /></label>
-          <div class="field-grid"><label>Категория<select name="category"><option>Тематическая встреча</option><option>Волонтёрство</option><option>Поддержка школьников</option><option>Мастер-класс</option></select></label><label>Дата<input name="date" type="date" required /></label></div>
-          <div class="field-grid"><label>Время<input name="times" required placeholder="18:00, 19:00" /></label><label>Место<input name="location" required maxlength="120" placeholder="Адрес или площадка" /></label></div>
+        <section class="admin-panel"><h2>Добавить подтверждённое событие</h2><form id="eventForm" class="admin-form">
+          <label>Название<input name="title" required maxlength="100" placeholder="Название мероприятия" /></label>
+          <div class="field-grid"><label>Категория<select name="category"><option>Тематическая встреча</option><option>Волонтёрство</option><option>Поддержка школьников</option><option>Мастер-класс</option></select></label><label>Дата<input name="date" id="eventDateAdmin" type="date" required /></label></div>
+          <div class="field-grid"><label>Время<input name="times" required placeholder="18:00, 19:00" /></label><label>Место в Каменске-Уральском<input name="location" required maxlength="160" placeholder="Укажите подтверждённый адрес" /></label></div>
           <label>Описание<textarea name="description" rows="3" required maxlength="300" placeholder="Коротко расскажите о событии"></textarea></label>
           <button class="button" type="submit">Добавить событие <span aria-hidden="true">+</span></button>
         </form>
-        <h2 style="margin-top:28px">События на сайте</h2><div id="adminEvents" class="admin-event-list"></div></section>
+        <h2 style="margin-top:28px">Опубликованные в этом браузере события</h2><div id="adminEvents" class="admin-event-list"></div></section>
         <section class="admin-panel"><div class="signup-header"><h2>Заявки <span id="signupCount"></span></h2><div class="signup-tools"><button id="exportCsv" type="button">Скачать CSV</button><button id="clearSignups" type="button">Удалить все</button></div></div><div id="signupList" class="signup-list" style="margin-top:18px"></div></section>
       </div>
     </main><script src="admin.js"></script>

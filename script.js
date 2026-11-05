@@ -1,17 +1,6 @@
-const STORAGE_KEYS = { events: 'tochka-vstrechi-events', registrations: 'tochka-vstrechi-registrations' };
-const initialEvents = [
-  { id: 'community-talk', title: 'Встреча «Люди и город»', category: 'Тематическая встреча', description: 'Обсуждаем, как сделать город доброжелательнее и комфортнее для всех.', date: '2026-11-18', timeSlots: ['18:30', '19:00'], location: 'Центр культуры «Площадка», зал № 2' },
-  { id: 'volunteer-day', title: 'День добрых дел', category: 'Волонтёрство', description: 'Вместе помогаем местным инициативам и делаем общественное пространство лучше.', date: '2026-11-22', timeSlots: ['10:00', '12:30'], location: 'Парк имени Ленина, вход со стороны улицы Мира' },
-  { id: 'school-support', title: 'Как остановить буллинг: разговор и поддержка', category: 'Поддержка школьников', description: 'Безопасная встреча для школьников и взрослых: как распознать травлю и где искать поддержку.', date: '2026-11-25', timeSlots: ['17:00', '18:30'], location: 'Молодёжный центр «Вектор», аудитория 3' },
-  { id: 'creative-night', title: 'Творческая встреча «Идеи в действии»', category: 'Мастер-класс', description: 'Знакомимся, делимся идеями и создаём небольшие проекты вместе.', date: '2026-11-29', timeSlots: ['18:00', '19:30'], location: 'Коворкинг «Новый Вектор», 3-й этаж' }
-];
-
-function readStorage(key, fallback) {
-  try { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : fallback; }
-  catch { return fallback; }
-}
-function saveStorage(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
-let events = readStorage(STORAGE_KEYS.events, initialEvents);
+const STORAGE_KEYS = { events: 'slkk-events-v1', registrations: 'slkk-registrations-v1' };
+// No sample events are shown: add confirmed events in the organizer demo panel.
+let events = readStorage(STORAGE_KEYS.events, []);
 const cards = document.getElementById('eventCards');
 const eventSelect = document.getElementById('eventSelect');
 const dateInput = document.getElementById('eventDate');
@@ -19,7 +8,13 @@ const timeSelect = document.getElementById('eventTime');
 const locationInput = document.getElementById('eventLocation');
 const form = document.getElementById('registrationForm');
 const message = document.getElementById('formMessage');
+const submitButton = form.querySelector('[type="submit"]');
 
+function readStorage(key, fallback) {
+  try { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : fallback; }
+  catch { return fallback; }
+}
+function saveStorage(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 function formatDate(value) {
   if (!value) return '';
   return new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${value}T00:00:00`));
@@ -31,9 +26,19 @@ function appendText(parent, tag, text, className) {
   parent.append(node);
   return node;
 }
+function refreshEvents() {
+  events = readStorage(STORAGE_KEYS.events, []);
+  renderEvents();
+  renderOptions();
+}
 function renderEvents() {
   cards.replaceChildren();
-  if (!events.length) { appendText(cards, 'p', 'Сейчас нет запланированных событий. Загляните позже.', 'empty-state'); return; }
+  if (!events.length) {
+    const empty = appendText(cards, 'p', 'Скоро здесь появятся анонсы встреч и волонтёрских событий в Каменске-Уральском.', 'empty-state');
+    const link = document.createElement('a'); link.className = 'text-link'; link.href = '#register'; link.textContent = 'Следить за анонсами';
+    empty.append(document.createTextNode(' ')); empty.append(link);
+    return;
+  }
   events.forEach((item) => {
     const article = document.createElement('article'); article.className = 'event-card';
     const top = document.createElement('div'); top.className = 'event-card-top';
@@ -53,8 +58,10 @@ function renderEvents() {
 }
 function renderOptions(selectedId) {
   eventSelect.replaceChildren();
+  const placeholder = document.createElement('option'); placeholder.value = ''; placeholder.textContent = events.length ? 'Выберите событие' : 'Пока нет открытых событий'; placeholder.disabled = true; placeholder.selected = true; eventSelect.append(placeholder);
   events.forEach((item) => { const option = document.createElement('option'); option.value = item.id; option.textContent = item.title; eventSelect.append(option); });
   if (selectedId && events.some((item) => item.id === selectedId)) eventSelect.value = selectedId;
+  submitButton.disabled = events.length === 0;
   updateEventDetails();
 }
 function updateEventDetails() {
@@ -69,11 +76,13 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   const data = new FormData(form);
   const selected = events.find((item) => item.id === data.get('event'));
-  if (!selected) { message.textContent = 'Выберите доступное событие.'; return; }
+  if (!selected) { message.textContent = 'Сейчас нет доступных событий для записи.'; return; }
   const registrations = readStorage(STORAGE_KEYS.registrations, []);
-  registrations.push({ id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`, name: String(data.get('name')).trim(), email: String(data.get('email')).trim(), eventId: selected.id, eventTitle: selected.title, date: String(data.get('date')), time: String(data.get('time')), location: String(data.get('location')), role: String(data.get('role')), comment: String(data.get('message') || '').trim(), createdAt: new Date().toISOString() });
+  const name = String(data.get('name')).trim();
+  registrations.push({ id: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`, name, email: String(data.get('email')).trim(), eventId: selected.id, eventTitle: selected.title, date: String(data.get('date')), time: String(data.get('time')), location: String(data.get('location')), role: String(data.get('role')), comment: String(data.get('message') || '').trim(), createdAt: new Date().toISOString() });
   saveStorage(STORAGE_KEYS.registrations, registrations);
-  message.textContent = `Спасибо, ${String(data.get('name')).trim()}! Заявка сохранена в этом браузере. Это демо: организаторы её не получат.`;
+  message.textContent = `Спасибо, ${name}! Заявка сохранена в этом браузере. Это демо: организаторы её не получат.`;
   form.reset(); renderOptions();
 });
-renderEvents(); renderOptions();
+window.addEventListener('storage', (event) => { if (event.key === STORAGE_KEYS.events) refreshEvents(); });
+refreshEvents();
