@@ -1,189 +1,79 @@
-const eventData = [
-  {
-    id: 'community-talk',
-    title: 'Клуб обсуждений “Люди и город”',
-    category: 'Встреча',
-    description:
-      'Тематический разговор о том, как сделать город более дружелюбным, безопасным и интересным для каждого жителя.',
-    date: '2026-11-18',
-    timeSlots: ['18:30', '19:00'],
-    location: 'Центр культуры “Площадка”, зал №2',
-    tags: ['Нетворкинг', 'Идеи', 'Диалог']
-  },
-  {
-    id: 'volunteer-day',
-    title: 'Волонтёрский день сообществ',
-    category: 'Волонтёрство',
-    description:
-      'Совместная помощь в благоустройстве общественного пространства, сбор материалов и поддержка местных инициатив.',
-    date: '2026-11-22',
-    timeSlots: ['10:00', '12:30'],
-    location: 'Парк им. Ленина, вход со стороны улицы Мира',
-    tags: ['Помощь', 'Сообщество', 'Улица']
-  },
-  {
-    id: 'creative-night',
-    title: 'Творческая встреча “Идеи в действии”',
-    category: 'Мастер-класс',
-    description:
-      'Небольшой формат общения, обмена идеями и интерактивного созидания в среде творческих людей и активистов.',
-    date: '2026-11-29',
-    timeSlots: ['18:00', '19:30'],
-    location: 'Коворкинг “Новый Вектор”, 3-й этаж',
-    tags: ['Творчество', 'Мастер-класс', 'Идеи']
-  }
+const STORAGE_KEYS = { events: 'tochka-vstrechi-events', registrations: 'tochka-vstrechi-registrations' };
+const initialEvents = [
+  { id: 'community-talk', title: 'Встреча «Люди и город»', category: 'Тематическая встреча', description: 'Обсуждаем, как сделать город доброжелательнее и комфортнее для всех.', date: '2026-11-18', timeSlots: ['18:30', '19:00'], location: 'Центр культуры «Площадка», зал № 2' },
+  { id: 'volunteer-day', title: 'День добрых дел', category: 'Волонтёрство', description: 'Вместе помогаем местным инициативам и делаем общественное пространство лучше.', date: '2026-11-22', timeSlots: ['10:00', '12:30'], location: 'Парк имени Ленина, вход со стороны улицы Мира' },
+  { id: 'school-support', title: 'Как остановить буллинг: разговор и поддержка', category: 'Поддержка школьников', description: 'Безопасная встреча для школьников и взрослых: как распознать травлю и где искать поддержку.', date: '2026-11-25', timeSlots: ['17:00', '18:30'], location: 'Молодёжный центр «Вектор», аудитория 3' },
+  { id: 'creative-night', title: 'Творческая встреча «Идеи в действии»', category: 'Мастер-класс', description: 'Знакомимся, делимся идеями и создаём небольшие проекты вместе.', date: '2026-11-29', timeSlots: ['18:00', '19:30'], location: 'Коворкинг «Новый Вектор», 3-й этаж' }
 ];
 
-const eventCardsContainer = document.getElementById('eventCards');
+function readStorage(key, fallback) {
+  try { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : fallback; }
+  catch { return fallback; }
+}
+function saveStorage(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+let events = readStorage(STORAGE_KEYS.events, initialEvents);
+const cards = document.getElementById('eventCards');
 const eventSelect = document.getElementById('eventSelect');
-const eventDateInput = document.getElementById('eventDate');
-const eventTimeSelect = document.getElementById('eventTime');
-const eventLocationInput = document.getElementById('eventLocation');
+const dateInput = document.getElementById('eventDate');
+const timeSelect = document.getElementById('eventTime');
+const locationInput = document.getElementById('eventLocation');
 const form = document.getElementById('registrationForm');
-const formMessage = document.getElementById('formMessage');
+const message = document.getElementById('formMessage');
 
-function renderEventCards() {
-  eventCardsContainer.innerHTML = eventData
-    .map(
-      (event) => `
-        <article class="event-card">
-          <div class="event-top">
-            <h3>${event.title}</h3>
-            <span class="badge">${event.category}</span>
-          </div>
-          <p>${event.description}</p>
-          <div class="event-info">
-            <span>📅 ${formatDate(event.date)}</span>
-            <span>🕒 ${event.timeSlots.join(', ')}</span>
-            <span>📍 ${event.location}</span>
-          </div>
-          <div class="mini-row">
-            ${event.tags.map((tag) => `<span>${tag}</span>`).join('')}
-          </div>
-        </article>
-      `
-    )
-    .join('');
+function formatDate(value) {
+  if (!value) return '';
+  return new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${value}T00:00:00`));
 }
-
-function formatDate(dateString) {
-  const date = new Date(dateString + 'T00:00:00');
-  return new Intl.DateTimeFormat('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }).format(date);
+function appendText(parent, tag, text, className) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = text;
+  parent.append(node);
+  return node;
 }
-
-function populateEventSelect() {
-  eventSelect.innerHTML = eventData
-    .map(
-      (event) => `<option value="${event.id}">${event.title}</option>`
-    )
-    .join('');
-
+function renderEvents() {
+  cards.replaceChildren();
+  if (!events.length) { appendText(cards, 'p', 'Сейчас нет запланированных событий. Загляните позже.', 'empty-state'); return; }
+  events.forEach((item) => {
+    const article = document.createElement('article'); article.className = 'event-card';
+    const top = document.createElement('div'); top.className = 'event-card-top';
+    appendText(top, 'span', item.category, 'event-category');
+    appendText(top, 'span', formatDate(item.date), 'event-date-label'); article.append(top);
+    appendText(article, 'h3', item.title);
+    appendText(article, 'p', item.description);
+    const info = document.createElement('div'); info.className = 'event-card-info';
+    const dateLine = document.createElement('span'); dateLine.innerHTML = '<b>◷</b>'; dateLine.append(document.createTextNode(` ${item.timeSlots.join(' · ')}`)); info.append(dateLine);
+    const placeLine = document.createElement('span'); placeLine.innerHTML = '<b>⌖</b>'; placeLine.append(document.createTextNode(` ${item.location}`)); info.append(placeLine);
+    article.append(info);
+    const button = document.createElement('a'); button.className = 'button'; button.href = '#register'; button.append(document.createTextNode('Записаться '));
+    const arrow = document.createElement('span'); arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '↗'; button.append(arrow);
+    button.addEventListener('click', () => { eventSelect.value = item.id; updateEventDetails(); });
+    article.append(button); cards.append(article);
+  });
+}
+function renderOptions(selectedId) {
+  eventSelect.replaceChildren();
+  events.forEach((item) => { const option = document.createElement('option'); option.value = item.id; option.textContent = item.title; eventSelect.append(option); });
+  if (selectedId && events.some((item) => item.id === selectedId)) eventSelect.value = selectedId;
   updateEventDetails();
 }
-
 function updateEventDetails() {
-  const selected = eventData.find((event) => event.id === eventSelect.value) || eventData[0];
-
-  eventDateInput.value = selected.date;
-  eventTimeSelect.innerHTML = selected.timeSlots
-    .map((slot) => `<option value="${slot}">${slot}</option>`)
-    .join('');
-  eventLocationInput.value = selected.location;
+  const selected = events.find((item) => item.id === eventSelect.value);
+  if (!selected) { dateInput.value = ''; locationInput.value = ''; timeSelect.replaceChildren(); return; }
+  dateInput.value = selected.date; locationInput.value = selected.location;
+  timeSelect.replaceChildren();
+  selected.timeSlots.forEach((slot) => { const option = document.createElement('option'); option.value = slot; option.textContent = slot; timeSelect.append(option); });
 }
-
-function handleSubmit(event) {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-  const name = formData.get('name');
-  const eventTitle = eventData.find((item) => item.id === formData.get('event'))?.title || 'мероприятие';
-  const selectedTime = formData.get('time');
-  const selectedDate = formData.get('date');
-  const location = formData.get('location');
-
-  formMessage.textContent = `Спасибо, ${name}! Ваша заявка на ${eventTitle} на ${formatDate(selectedDate)} в ${selectedTime} по адресу ${location} успешно отправлена.`;
-  formMessage.style.color = '#2d6a4f';
-  form.reset();
-  populateEventSelect();
-}
-
 eventSelect.addEventListener('change', updateEventDetails);
-form.addEventListener('submit', handleSubmit);
-
-renderEventCards();
-populateEventSelect();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const selected = events.find((item) => item.id === data.get('event'));
+  if (!selected) { message.textContent = 'Выберите доступное событие.'; return; }
+  const registrations = readStorage(STORAGE_KEYS.registrations, []);
+  registrations.push({ id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`, name: String(data.get('name')).trim(), email: String(data.get('email')).trim(), eventId: selected.id, eventTitle: selected.title, date: String(data.get('date')), time: String(data.get('time')), location: String(data.get('location')), role: String(data.get('role')), comment: String(data.get('message') || '').trim(), createdAt: new Date().toISOString() });
+  saveStorage(STORAGE_KEYS.registrations, registrations);
+  message.textContent = `Спасибо, ${String(data.get('name')).trim()}! Заявка сохранена в этом браузере. Это демо: организаторы её не получат.`;
+  form.reset(); renderOptions();
+});
+renderEvents(); renderOptions();

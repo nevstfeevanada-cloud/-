@@ -1,23 +1,25 @@
-# Gather & Grow
+# Точка встречи
 
-Landing page for community events, talks, and volunteering.
+Русскоязычный сайт сообщества тематических встреч, волонтёрских событий и инициативы по поддержке школьников против буллинга.
 
-## Features
-- event cards with schedules and locations
-- registration form for selecting meeting time and place
-- simple validation and confirmation message
-- ready to publish on GitHub Pages
+## Что есть в проекте
+- тёмный адаптивный дизайн в фиолетовых и синих тонах;
+- карточки встреч и волонтёрских событий;
+- отдельный раздел о поддержке школьников при буллинге;
+- форма записи с выбором события, даты, времени и места;
+- демо-панель организатора (`admin.html`) для добавления событий, просмотра заявок и экспорта CSV.
 
-## Run locally
-Open `index.html` in a browser, or serve the folder with a static server.
-
-Example:
+## Запуск
+Откройте `index.html` или запустите простой локальный веб-сервер из папки проекта:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000
+Откройте `http://localhost:8000`.
 
-## GitHub Pages
-After pushing to the repository, enable GitHub Pages in the repository settings and select the root folder.
+## Важно о заявках и панели
+Это статический прототип. Данные заявок и список событий сохраняются в `localStorage` браузера, поэтому они доступны только в том же браузере и на том же устройстве. Форма не отправляет заявки организаторам, а панель не защищена авторизацией. Не собирайте реальные персональные данные через эту версию. Для полноценной публикации нужно подключить серверную базу данных и безопасную авторизацию организатора.
+
+## Публикация
+Статические страницы можно разместить через GitHub Pages; для реального сбора заявок потребуется отдельный backend или сервис форм с подходящей политикой обработки данных.

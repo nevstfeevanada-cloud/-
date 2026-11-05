@@ -3,422 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gather & Grow | Тематические встречи и волонтёрство</title>
-    <meta
-      name="description"
-      content="Запись на тематические встречи, мероприятия и волонтёрские события. Выберите время, место и формат участия."
-    />
+    <meta name="theme-color" content="#090b16" />
+    <meta name="description" content="Тематические встречи, волонтёрство и поддержка школьников против буллинга. Выбирайте событие и записывайтесь." />
+    <title>Точка встречи — события, волонтёрство, поддержка</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container nav">
-        <div class="brand">
-          <div class="brand-mark">G</div>
-          <span>Gather & Grow</span>
-        </div>
+        <a class="brand" href="#home" aria-label="Точка встречи — на главную">
+          <span class="brand-mark" aria-hidden="true">Т</span><span>точка встречи</span>
+        </a>
         <nav class="main-nav" aria-label="Главная навигация">
-          <a href="#about">О нас</a>
-          <a href="#events">Мероприятия</a>
-          <a href="#register">Запись</a>
+          <a href="#about">О нас</a><a href="#events">События</a><a href="#support">Поддержка школьников</a>
         </nav>
-        <a class="button button-small" href="#register">Записаться</a>
+        <a class="button button-small" href="#register">Записаться <span aria-hidden="true">↗</span></a>
       </div>
     </header>
 
     <main>
-      <section class="hero">
+      <section id="home" class="hero">
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div><div class="hero-glow hero-glow-two" aria-hidden="true"></div>
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Сообщество для людей, которым важны идеи и действие</p>
-            <h1>Тематические встречи, события и волонтёрство в одном месте</h1>
-            <p class="subtext">
-              Мы собираем единомышленников для полезных разговоров, творческих встреч и
-              практической помощи людям и городу. Присоединяйтесь к событиям, которые
-              вдохновляют и создают настоящую связь между участниками.
-            </p>
-            <div class="hero-actions">
-              <a class="button" href="#register">Записаться на встречу</a>
-              <a class="button button-secondary" href="#events">Посмотреть события</a>
-            </div>
-            <ul class="stat-list" aria-label="Показатели сообщества">
-              <li><strong>150+</strong><span>участников</span></li>
-              <li><strong>18</strong><span>мероприятий</span></li>
-              <li><strong>6</strong><span>волонтёрских инициатив</span></li>
-            </ul>
+            <p class="eyebrow"><span class="status-dot"></span> Люди встречаются. Добрые дела начинаются.</p>
+            <h1>Встречаемся,<br /><span class="gradient-text">чтобы менять</span><br />жизнь вокруг.</h1>
+            <p class="subtext">Тематические события, волонтёрские инициативы и поддержка школьников. Найдите своё сообщество и присоединяйтесь.</p>
+            <div class="hero-actions"><a class="button" href="#events">Выбрать событие <span aria-hidden="true">→</span></a><a class="text-link" href="#about">Узнать о проекте <span aria-hidden="true">↓</span></a></div>
+            <ul class="stat-list" aria-label="О проекте"><li><strong>Вместе</strong><span>создаём сообщество</span></li><li><strong>Открыто</strong><span>для новых идей</span></li><li><strong>С заботой</strong><span>друг о друге</span></li></ul>
           </div>
-
-          <div class="hero-card" aria-label="Предстоящие события">
-            <p class="card-label">Ближайшее мероприятие</p>
-            <h2>Клуб обсуждений “Люди и город”</h2>
-            <div class="event-meta">
-              <span>📅 18 ноября</span>
-              <span>🕒 18:30</span>
-            </div>
-            <div class="event-meta">
-              <span>📍 Центр культуры “Площадка”</span>
-            </div>
-            <p>
-              Разговор о том, как сделать пространство вокруг нас более доброжелательным,
-              активным и открытым для всех.
-            </p>
-            <div class="tag-row">
-              <span>Мастер-класс</span>
-              <span>Нетворкинг</span>
-              <span>Волонтёрство</span>
-            </div>
-          </div>
+          <aside class="next-event" aria-label="Пример ближайшего события">
+            <div class="next-event-top"><span class="live-pill"><span class="status-dot"></span> Скоро</span><span class="event-index">01 / СОБЫТИЕ</span></div>
+            <div class="event-art" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="art-caption">ИДЕИ<br />В ДЕЙСТВИИ</span></div>
+            <p class="card-kicker">ТЕМАТИЧЕСКАЯ ВСТРЕЧА</p><h2>Люди и город</h2>
+            <p class="card-description">Обсуждаем, как сделать город доброжелательнее и комфортнее для всех.</p>
+            <div class="event-detail"><span aria-hidden="true">◷</span> 18 ноября · 18:30</div><div class="event-detail"><span aria-hidden="true">⌖</span> Центр культуры «Площадка»</div>
+            <a class="card-link" href="#register">Записаться на встречу <span aria-hidden="true">↗</span></a>
+          </aside>
         </div>
+        <div class="container hero-bottom"><span>СООБЩЕСТВО · ВОЛОНТЁРСТВО · ПОДДЕРЖКА</span><span>ПРОСТРАНСТВО, ГДЕ КАЖДЫЙ ВАЖЕН</span></div>
       </section>
 
       <section id="about" class="section">
-        <div class="container narrow">
-          <p class="section-tag">О нас</p>
-          <h2>Мы создаём пространство для общения, идей и полезных дел</h2>
-          <div class="feature-grid">
-            <article class="feature-card">
-              <div class="icon">🎤</div>
-              <h3>Тематические встречи</h3>
-              <p>
-                Обсуждаем идеи, темы и вызовы общества через живое общение и экспертные
-                выступления.
-              </p>
-            </article>
-            <article class="feature-card">
-              <div class="icon">🤝</div>
-              <h3>Волонтёрство</h3>
-              <p>
-                Помогаем людям участвовать в реальных инициативах, социальных проектах и
-                совместных делах.
-              </p>
-            </article>
-            <article class="feature-card">
-              <div class="icon">🌱</div>
-              <h3>Сообщество</h3>
-              <p>
-                Мы объединяем людей, которым важно не просто присутствовать, а быть частью
-                движения и изменений.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="events" class="section alt-bg">
         <div class="container">
-          <div class="section-heading">
-            <div>
-              <p class="section-tag">Мероприятия</p>
-              <h2>Выберите формат участия</h2>
-            </div>
-            <a class="button button-secondary" href="#register">Зарегистрироваться</a>
+          <div class="section-heading"><div><p class="section-tag">Зачем мы собираемся</p><h2>Не просто встречи.<br /><span class="muted-heading">Настоящее участие.</span></h2></div><p class="section-intro">Создаём место, где можно познакомиться, поделиться идеями, найти поддержку и вместе сделать что-то хорошее.</p></div>
+          <div class="feature-grid">
+            <article class="feature-card"><span class="feature-number">01</span><div class="feature-icon icon-purple" aria-hidden="true">✳</div><h3>Тематические встречи</h3><p>Разговоры, мастер-классы и новые знакомства вокруг интересных тем и общих идей.</p><a href="#events" class="subtle-link">Найти встречу <span aria-hidden="true">→</span></a></article>
+            <article class="feature-card"><span class="feature-number">02</span><div class="feature-icon icon-blue" aria-hidden="true">↗</div><h3>Волонтёрство</h3><p>Включайтесь в добрые дела и городские инициативы — вместе проще менять к лучшему.</p><a href="#events" class="subtle-link">Стать волонтёром <span aria-hidden="true">→</span></a></article>
+            <article class="feature-card"><span class="feature-number">03</span><div class="feature-icon icon-pink" aria-hidden="true">♡</div><h3>Поддержка школьников</h3><p>Помогаем детям и взрослым говорить о буллинге и искать безопасные способы остановить его.</p><a href="#support" class="subtle-link">Как мы помогаем <span aria-hidden="true">→</span></a></article>
           </div>
-
-          <div class="event-list" id="eventCards"></div>
         </div>
       </section>
 
-      <section id="register" class="section form-section">
-        <div class="container form-grid">
-          <div class="info-panel">
-            <p class="section-tag">Запись</p>
-            <h2>Зарегистрируйтесь на мероприятие</h2>
-            <p>
-              Выберите интересующее событие, удобное время и локацию. После записи мы
-              отправим подтверждение на вашу электронную почту.
-            </p>
-            <ul class="check-list">
-              <li>Подтверждение участия в день события</li>
-              <li>Актуальное время и место в карточке события</li>
-              <li>Возможность принять участие в волонтёрской программе</li>
-            </ul>
+      <section id="events" class="section events-section">
+        <div class="container"><div class="section-heading"><div><p class="section-tag">Календарь сообщества</p><h2>События, которые объединяют</h2></div><a class="text-link" href="#register">Присоединиться <span aria-hidden="true">↗</span></a></div>
+          <div class="event-list" id="eventCards" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="support" class="section support-section">
+        <div class="container support-grid">
+          <div class="support-visual" aria-hidden="true"><div class="support-orbit orbit-one"></div><div class="support-orbit orbit-two"></div><div class="support-heart">♡</div><span class="support-word word-one">ТЫ НЕ ОДИН</span><span class="support-word word-two">МЫ РЯДОМ</span></div>
+          <div class="support-copy"><p class="section-tag">Безопасная среда для каждого</p><h2>Буллинг — не норма.<br /><span class="gradient-text">Помощь рядом.</span></h2><p class="support-lead">Мы хотим, чтобы школьники могли учиться и общаться без страха. На встречах проекта обсуждаем, как распознавать травлю, поддержать того, кто с ней столкнулся, и обратиться за помощью.</p>
+            <div class="support-steps"><article><span>01</span><div><h3>Выслушать без осуждения</h3><p>Если вам или знакомому плохо, расскажите взрослому, которому доверяете: родителю, учителю или школьному психологу.</p></div></article><article><span>02</span><div><h3>Не оставаться один на один</h3><p>Можно попросить близкого человека пойти с вами к классному руководителю, администрации школы или специалисту.</p></div></article><article><span>03</span><div><h3>Действовать безопасно</h3><p>Записывайте, что происходит, и сохраняйте сообщения. Не отвечайте на травлю опасными действиями и не подвергайте себя риску.</p></div></article></div>
+            <p class="support-note"><strong>Нужна срочная помощь?</strong> Обратитесь к взрослому рядом. При непосредственной угрозе жизни или безопасности звоните 112.</p>
+            <a class="button button-outline" href="#register">Присоединиться к инициативе <span aria-hidden="true">→</span></a>
           </div>
+        </div>
+      </section>
 
+      <section id="register" class="section register-section">
+        <div class="container register-grid">
+          <div class="register-copy"><p class="section-tag">Ваш следующий шаг</p><h2>Будем рады<br />встретиться.</h2><p>Выберите событие, время и место. Оставьте контакты — организаторы смогут связаться с вами.</p><div class="register-mark" aria-hidden="true">ТВ<span>—</span></div></div>
           <form id="registrationForm" class="registration-form">
-            <div class="field-grid">
-              <label>
-                <span>Имя</span>
-                <input type="text" name="name" placeholder="Ваше имя" required />
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="email" name="email" placeholder="you@example.com" required />
-              </label>
-            </div>
-
-            <label>
-              <span>Мероприятие</span>
-              <select id="eventSelect" name="event" required></select>
-            </label>
-
-            <div class="field-grid">
-              <label>
-                <span>Дата</span>
-                <input id="eventDate" type="date" name="date" required />
-              </label>
-              <label>
-                <span>Время</span>
-                <select id="eventTime" name="time" required></select>
-              </label>
-            </div>
-
-            <label>
-              <span>Место</span>
-              <input id="eventLocation" type="text" name="location" readonly />
-            </label>
-
-            <label>
-              <span>Роль</span>
-              <select name="role">
-                <option value="guest">Участник</option>
-                <option value="volunteer">Волонтёр</option>
-                <option value="speaker">Спикер / ведущий</option>
-              </select>
-            </label>
-
-            <label>
-              <span>Комментарий</span>
-              <textarea name="message" rows="4" placeholder="Напишите, если есть вопросы или пожелания"></textarea>
-            </label>
-
-            <label class="checkbox-line">
-              <input type="checkbox" name="consent" required />
-              <span>Согласен на обработку данных и получение подтверждения участия.</span>
-            </label>
-
-            <button type="submit" class="button submit-button">Записаться</button>
-            <p id="formMessage" class="form-message" aria-live="polite"></p>
+            <div class="form-title"><div><p class="section-tag">Регистрация</p><h3>Записаться на событие</h3></div><span class="form-step">01 / 01</span></div>
+            <div class="field-grid"><label><span>Ваше имя</span><input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required /></label><label><span>Электронная почта</span><input type="email" name="email" autocomplete="email" placeholder="name@example.ru" required /></label></div>
+            <label><span>Событие</span><select id="eventSelect" name="event" required></select></label>
+            <div class="field-grid"><label><span>Дата</span><input id="eventDate" type="date" name="date" required /></label><label><span>Время</span><select id="eventTime" name="time" required></select></label></div>
+            <label><span>Место проведения</span><input id="eventLocation" type="text" name="location" readonly /></label>
+            <label><span>Как хотите участвовать?</span><select name="role"><option value="Участник">Участник</option><option value="Волонтёр">Волонтёр</option><option value="Спикер / ведущий">Спикер / ведущий</option></select></label>
+            <label><span>Комментарий <em>необязательно</em></span><textarea name="message" rows="3" placeholder="Вопрос или пожелание организаторам"></textarea></label>
+            <label class="checkbox-line"><input type="checkbox" name="consent" required /><span>Согласен(на) на обработку данных для организации участия в событии.</span></label>
+            <button type="submit" class="button submit-button">Отправить заявку <span aria-hidden="true">↗</span></button><p id="formMessage" class="form-message" aria-live="polite"></p>
+            <p class="privacy-note">Демо-версия: заявки сохраняются только в этом браузере и не отправляются организаторам.</p>
           </form>
         </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <div>
-          <div class="brand footer-brand">
-            <div class="brand-mark">G</div>
-            <span>Gather & Grow</span>
-          </div>
-        </div>
-        <p>Создаём пространство для встреч, идей и добрых дел.</p>
-      </div>
-    </footer>
-
+    <footer class="site-footer"><div class="container footer-row"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">Т</span><span>точка встречи</span></a><p>События, волонтёрство и поддержка — вместе.</p><a href="admin.html" class="footer-admin">Панель организатора <span aria-hidden="true">↗</span></a><span class="copyright">© 2026</span></div></footer>
     <script src="script.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
